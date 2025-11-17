@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOXY MARKET</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOXY MARKET</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1 class="logo">BLOXY MARKET</h1>
-    </header>
+<header>
+    <h1 class="logo">BLOXY MARKET</h1>
+</header>
 
-    <nav class="menu">
-        <a href="#loja" class="menu-item">LOJA</a>
-        <a href="https://discord.gg/H7JdKpgHbu" target="_blank" class="menu-item discord">DISCORD</a>
-    </nav>
+<nav class="menu">
+    <a href="index.html" class="menu-item">LOJA</a>
+    <a href="https://discord.gg/H7JdKpgHbu" target="_blank" class="menu-item discord">DISCORD</a>
+</nav>
 
-    <section id="loja" class="loja">
-        <h2>Escolha seu jogo:</h2>
-        <div class="cards">
-            <div class="card" onclick="mostrarProdutos('steal')">
-                <h3>STEAL A BRAINROT</h3>
-                <p>Pegue uma conta do jogo!</p>
-            </div>
-            <div class="card" onclick="mostrarProdutos('blox')">
-                <h3>BLOX FRUIT</h3>
-                <p>Contas prontas para jogar!</p>
-            </div>
+<section id="loja" class="loja">
+    <h2>Escolha seu jogo</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>STEAL A BRAINROT</h3>
+            <p>Pegue uma conta do jogo!</p>
+            <a href="comprar.html?jogo=steal" class="btn-comprar">Comprar</a>
         </div>
+        <div class="card">
+            <h3>BLOX FRUIT</h3>
+            <p>Contas prontas para jogar!</p>
+            <a href="comprar.html?jogo=blox" class="btn-comprar">Comprar</a>
+        </div>
+    </div>
+</section>
 
-        <div id="produtos-container" class="produtos-container"></div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 BLOXY MARKET. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="script.js"></script>
+<footer>
+    <p>&copy; 2025 BLOXY MARKET</p>
+</footer>
 </body>
 </html>

@@ -1,163 +1,165 @@
-/* Reset básico */
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
+/* BODY */
 body {
-    background: #0b0b0b;
+    font-family: 'Arial', sans-serif;
+    background: #000000;
     color: #fff;
+    overflow-x: hidden;
 }
 
-/* Header */
+/* LOGO HEADER */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: #1a1a1a;
-    border-bottom: 2px solid #6a0dad;
-}
-
-header .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #6a0dad;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-header nav a {
-    color: #fff;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-header nav a:hover {
-    color: #6a0dad;
-}
-
-/* Hero */
-.hero {
     text-align: center;
-    padding: 5rem 2rem;
-    background: linear-gradient(to bottom right, #1a1a1a, #2e002e);
+    padding: 2rem;
+    background: linear-gradient(90deg, #000, #0b0b0b);
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.logo {
+    font-size: 4rem;
+    font-weight: 900;
+    color: gold;
+    text-shadow: 0 0 15px gold, 0 0 30px purple, 0 0 50px gold;
+    animation: glow 2s infinite alternate;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+@keyframes glow {
+    0% { text-shadow: 0 0 5px gold, 0 0 10px purple, 0 0 20px gold; }
+    100% { text-shadow: 0 0 15px gold, 0 0 30px purple, 0 0 50px gold; }
 }
 
-.hero button {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    background: #6a0dad;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.hero button:hover {
-    background: #8a2be2;
-}
-
-/* Produtos */
-.produtos {
-    padding: 4rem 2rem;
-    text-align: center;
-}
-
-.produtos .cards {
+/* MENU */
+.menu {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    margin-top: 2rem;
+    margin: 1.5rem 0;
+}
+
+.menu-item {
+    padding: 1rem 2rem;
+    border: 2px solid #6a0dad;
+    border-radius: 12px;
+    text-decoration: none;
+    color: gold;
+    background: rgba(20,0,40,0.2);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #6a0dad;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(90deg, gold, purple);
+    color: #000;
+    box-shadow: 0 0 20px gold, 0 0 40px purple;
+}
+
+.discord {
+    border-color: gold;
+}
+
+/* LOJA */
+.loja {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.loja h2 {
+    color: gold;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px gold;
+}
+
+/* CARDS FLUTUANTES */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
 .card {
-    background: #1a1a1a;
-    border: 2px solid #6a0dad;
+    background: linear-gradient(145deg, #1a1a1a, #2c2c2c);
+    border: 2px solid purple;
     padding: 2rem;
     width: 250px;
-    border-radius: 10px;
-    transition: 0.3s;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    box-shadow: 0 0 15px #6a0dad;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border-color: #8a2be2;
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 0 30px gold, 0 0 50px purple;
+    border: 2px solid gold;
 }
 
 .card h3 {
-    margin-bottom: 1rem;
+    color: gold;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px gold;
 }
 
-.card button {
-    padding: 0.5rem 1rem;
-    background: #6a0dad;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.card button:hover {
-    background: #8a2be2;
-}
-
-/* Contato */
-.contato {
-    padding: 4rem 2rem;
-    text-align: center;
-}
-
-.contato form {
+/* PRODUTOS */
+.produtos-container {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
-.contato input, .contato textarea {
-    padding: 1rem;
-    border: 2px solid #6a0dad;
-    border-radius: 5px;
-    background: #1a1a1a;
-    color: #fff;
+.produto {
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    border: 2px solid purple;
+    padding: 1.5rem;
+    width: 220px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px purple;
 }
 
-.contato button {
-    padding: 1rem;
-    background: #6a0dad;
-    color: #fff;
+.produto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px gold, 0 0 40px purple;
+    border: 2px solid gold;
+}
+
+.produto h4 {
+    color: gold;
+    margin-bottom: 0.5rem;
+}
+
+.produto button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
     border: none;
+    background: gold;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.contato button:hover {
-    background: #8a2be2;
+.produto button:hover {
+    background: purple;
+    color: gold;
 }
 
-/* Footer */
+/* FOOTER */
 footer {
     text-align: center;
     padding: 2rem;
-    background: #1a1a1a;
-    border-top: 2px solid #6a0dad;
+    color: gold;
+    border-top: 1px solid purple;
+    margin-top: 3rem;
 }

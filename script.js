@@ -1,30 +1,32 @@
-const produtos = {
-    steal: [
-        { nome: "Conta V1", stock: 2, preco: "R$10,00" },
-        { nome: "Conta V2", stock: 1, preco: "R$15,00" },
-        { nome: "Conta V3", stock: 4, preco: "R$8,50" },
-    ],
-    blox: [
-        { nome: "Conta BF Full", stock: 3, preco: "R$20,00" },
-        { nome: "Conta BF Starter", stock: 5, preco: "R$12,00" },
-    ]
-};
+// Pegar jogo via query string
+const params = new URLSearchParams(window.location.search);
+const jogo = params.get('jogo');
+const titulo = document.getElementById('titulo-jogo');
 
-function mostrarProdutos(jogo) {
-    const container = document.getElementById("produtos-container");
-    container.innerHTML = '';
-
-    produtos[jogo].forEach(prod => {
-        const div = document.createElement("div");
-        div.className = "produto";
-        div.innerHTML = `
-            <h4>${prod.nome}</h4>
-            <p>Stock: ${prod.stock}</p>
-            <p>Preço: ${prod.preco}</p>
-            <button>Comprar</button>
-        `;
-        container.appendChild(div);
-    });
-
-    container.scrollIntoView({ behavior: "smooth" });
+if (jogo === 'steal') {
+    titulo.textContent = 'STEAL A BRAINROT';
+} else if (jogo === 'blox') {
+    titulo.textContent = 'BLOX FRUIT';
 }
+
+// Função para gerar código aleatório único
+function gerarCodigo(tamanho = 12) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let codigo = '';
+    for (let i = 0; i < tamanho; i++) {
+        codigo += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return codigo;
+}
+
+// Evento do botão "Paguei"
+document.getElementById('btn-paguei').addEventListener('click', () => {
+    const codigoContainer = document.getElementById('codigo-container');
+    const codigoGerado = document.getElementById('codigo-gerado');
+
+    codigoGerado.textContent = gerarCodigo();
+    codigoContainer.style.display = 'block';
+
+    // Scroll suave para mostrar o código
+    codigoContainer.scrollIntoView({ behavior: 'smooth' });
+});

@@ -3,60 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Roblox - Black & Roxo</title>
+    <title>BLOXY MARKET</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="logo">Loja Roblox</div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#produtos">Produtos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        <h1 class="logo">BLOXY MARKET</h1>
     </header>
 
-    <section id="home" class="hero">
-        <h1>Bem-vindo à Loja Roblox</h1>
-        <p>Os melhores itens e contas para Roblox!</p>
-        <button onclick="scrollToProducts()">Ver Produtos</button>
-    </section>
+    <nav class="menu">
+        <a href="#loja" class="menu-item">LOJA</a>
+        <a href="https://discord.gg/H7JdKpgHbu" target="_blank" class="menu-item discord">DISCORD</a>
+    </nav>
 
-    <section id="produtos" class="produtos">
-        <h2>Nossos Produtos</h2>
+    <section id="loja" class="loja">
+        <h2>Escolha seu jogo:</h2>
         <div class="cards">
-            <div class="card">
-                <h3>Robux 100</h3>
-                <p>Preço: R$4,80</p>
-                <button>Comprar</button>
+            <div class="card" onclick="mostrarProdutos('steal')">
+                <h3>STEAL A BRAINROT</h3>
+                <p>Pegue uma conta do jogo!</p>
             </div>
-            <div class="card">
-                <h3>Robux 200</h3>
-                <p>Preço: R$9,60</p>
-                <button>Comprar</button>
-            </div>
-            <div class="card">
-                <h3>Conta Blox Fruits</h3>
-                <p>Conta pronta para jogar!</p>
-                <button>Comprar</button>
+            <div class="card" onclick="mostrarProdutos('blox')">
+                <h3>BLOX FRUIT</h3>
+                <p>Contas prontas para jogar!</p>
             </div>
         </div>
-    </section>
 
-    <section id="contato" class="contato">
-        <h2>Contato</h2>
-        <form id="contatoForm">
-            <input type="text" placeholder="Seu nome" required>
-            <input type="email" placeholder="Seu email" required>
-            <textarea placeholder="Mensagem" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+        <div id="produtos-container" class="produtos-container"></div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Loja Roblox. Todos os direitos reservados.</p>
+        <p>&copy; 2025 BLOXY MARKET. Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>

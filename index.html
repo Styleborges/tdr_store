@@ -1,77 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Bot - Página Oficial</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MeuBot • Oficial</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-<header class="header">
-    <div class="container header-content">
-        <div class="logo">🐐 MeuBot</div>
-
-        <nav class="nav">
-            <a href="#inicio">INÍCIO</a>
-            <a href="#produtos">PRODUTOS</a>
-            <a href="#suporte">SUPORTE</a>
-            <a href="#termos">TERMOS</a>
-        </nav>
-
-        <a href="https://discord.com/oauth2/authorize?client_id=1439907381386547276" 
-           class="btn-login">Login com Discord</a>
-    </div>
-</header>
-
-<section class="hero container">
-    <div class="hero-left">
-        <h1>Vamos tornar sua <span>experiência</span> melhor.</h1>
-        <p>Oferecemos serviços, painéis e suporte 24/7 da forma mais simples e rápida possível.</p>
-
-        <a href="#produtos" class="btn-red">VER PRODUTOS</a>
-
-        <ul class="tags">
-            <li>⭐ Suporte Premium</li>
-            <li>🛡️ Segurança Garantida</li>
-            <li>🚀 Atualizações Constantes</li>
-        </ul>
-
-        <div class="card-suporte">
-            <h3>Precisa de ajuda?</h3>
-            <p>Entre no Discord para tirar dúvidas, fazer denúncias ou abrir ticket.</p>
-            <a href="https://discord.gg/SEU_SERVIDOR" class="btn-red">Entrar no Discord</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">🐐</div>
+        <div>
+          <h1>MeuBot</h1>
+          <small>Suporte • Painel • Convite</small>
         </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#home">INÍCIO</a>
+        <a href="#produtos">PRODUTOS</a>
+        <a href="#etapas">ETAPAS</a>
+        <a href="#suporte">SUPORTE</a>
+      </nav>
+
+      <div class="actions">
+        <a id="inviteLinkHeader" class="btn btn-ghost" target="_blank" rel="noopener">Convidar Bot</a>
+        <button id="loginBtn" class="btn btn-primary">Entrar com Discord</button>
+      </div>
     </div>
+  </header>
 
-    <div class="hero-right">
-        <div class="painel-card">
-            <div class="painel-header">Painel do MeuBot</div>
+  <main>
+    <section id="home" class="hero container">
+      <div class="hero-left">
+        <h2>Vamos tornar sua <span>experiência</span> melhor.</h2>
+        <p>Serviços, painel e suporte 24/7 para gerenciar seu servidor com segurança.</p>
 
-            <div class="painel-body">
-                <p>Gerencie seu bot facilmente com nosso painel dedicado.</p>
+        <div class="hero-actions">
+          <a href="#produtos" class="btn btn-red">VER PRODUTOS</a>
+          <a id="serverInviteBtn" class="btn btn-outline" target="_blank" rel="noopener">Entrar no Discord</a>
+        </div>
 
-                <div class="stats">
-                    <div><strong>99.9%</strong><span>Uptime</span></div>
-                    <div><strong>24/7</strong><span>Suporte</span></div>
-                    <div><strong>260+</strong><span>Servidores</span></div>
-                </div>
+        <div class="quick-card">
+          <strong>Precisa de ajuda?</strong>
+          <p>Abrir tickets, suporte e dúvidas. Entre no Discord.</p>
+          <a id="openDiscord" class="btn btn-ghost" target="_blank" rel="noopener">Abrir Discord</a>
+        </div>
+      </div>
 
-                <a href="#" class="btn-red painel-btn">Abrir Painel</a>
+      <aside class="hero-right">
+        <div class="panel-card">
+          <div class="panel-header">Painel do MeuBot</div>
+          <div class="panel-body">
+            <p class="muted">Painel conectado — informações do servidor e usuário.</p>
+
+            <div class="panel-stats">
+              <div>
+                <div class="stat-number" id="stat-users">—</div>
+                <div class="stat-label">Usuários</div>
+              </div>
+              <div>
+                <div class="stat-number" id="stat-guilds">—</div>
+                <div class="stat-label">Servidores</div>
+              </div>
+              <div>
+                <div class="stat-number" id="stat-support">—</div>
+                <div class="stat-label">Suporte</div>
+              </div>
             </div>
+
+            <div class="panel-actions">
+              <a id="openPanel" class="btn btn-red" href="#">Abrir Painel</a>
+              <a id="buyNow" class="btn btn-outline" href="#produtos">Adquirir</a>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </aside>
+    </section>
 
-<footer class="footer">
-    © 2025 MeuBot — Todos os direitos reservados
-</footer>
+    <section id="produtos" class="container produtos">
+      <h3>Produtos & Serviços</h3>
+      <div class="cards">
+        <article class="card">
+          <h4>Painel Premium</h4>
+          <p>Acesso ao painel com recursos exclusivos e prioridade no suporte.</p>
+          <div class="card-footer">
+            <span class="price">R$ 9,90 / mês</span>
+            <button class="btn btn-ghost buy-btn" data-item="painel">Comprar</button>
+          </div>
+        </article>
 
-<script src="script.js"></script>
-</body>
-</html>      <div><a href="#termos">Termos</a> • <a href="#privacidade">Privacidade</a></div>
+        <article class="card">
+          <h4>Configuração</h4>
+          <p>Instalação e configuração personalizada do bot no seu servidor.</p>
+          <div class="card-footer">
+            <span class="price">Sob consulta</span>
+            <button class="btn btn-ghost buy-btn" data-item="config">Contratar</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="etapas" class="container etapas">
+      <h3>Etapas</h3>
+      <ol class="steps">
+        <li><strong>Convidar o bot</strong> — use o botão "Convidar Bot" e adicione o bot ao seu servidor.</li>
+        <li><strong>Entrar no Discord</strong> — suporte e tickets.</li>
+        <li><strong>Fazer login</strong> — clique em "Entrar com Discord" para ver o painel.</li>
+        <li><strong>Adquirir produto</strong> — comprar painel/configuração (demo de pagamento incluida).</li>
+      </ol>
+    </section>
+
+    <section id="suporte" class="container suporte">
+      <h3>Suporte</h3>
+      <p>Dúvidas, denúncias ou problemas com compras — abra um ticket no Discord.</p>
+      <a id="supportInvite" class="btn btn-red" target="_blank" rel="noopener">Entrar no Discord</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> MeuBot • Todos os direitos reservados</div>
+      <div><a href="#termos">Termos</a> • <a href="#privacidade">Privacidade</a></div>
     </div>
   </footer>
+
+  <!-- Modal simples para checkout / status -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

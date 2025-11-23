@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Borges IA – Assistente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <main class="shell">
+    <!-- Lado esquerdo: branding -->
+    <aside class="side">
+      <div>
+        <div class="brand">
+          <div class="brand-logo">B</div>
+          <div>
+            <h1>Borges IA</h1>
+            <p>Seu copiloto para código, Roblox e estudos.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>O que o Borges IA faz?</h2>
+          <ul>
+            <li><i class="ri-code-s-slash-line"></i> Ajuda com JavaScript, Node, HTML e CSS.</li>
+            <li><i class="ri-gamepad-line"></i> Auxilia em scripts e ideias para Roblox.</li>
+            <li><i class="ri-brain-line"></i> Explica conceitos de forma clara e didática.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="side-footer">
+        <span>Borges IA • 2025</span>
+      </footer>
+    </aside>
+
+    <!-- Lado direito: login + chat -->
+    <section class="main">
+      <!-- LOGIN -->
+      <section id="loginPage" class="panel">
+        <header class="panel-header">
+          <h2>Entrar no Borges IA</h2>
+          <p>Use Google, convidado ou e-mail para acessar o chat.</p>
+        </header>
+
+        <div class="btn-row">
+          <button id="googleBtn" class="btn google">
+            <i class="ri-google-fill"></i> Entrar com Google
+          </button>
+
+          <button id="guestBtn" class="btn ghost">
+            <i class="ri-user-smile-line"></i> Entrar como convidado
+          </button>
+        </div>
+
+        <div class="divider">
+          <span>ou</span>
+        </div>
+
+        <form id="emailForm" class="form">
+          <div class="field">
+            <label for="emailInput"><i class="ri-mail-line"></i> E-mail</label>
+            <input id="emailInput" type="email" placeholder="seuemail@exemplo.com" required />
+          </div>
+          <div class="field">
+            <label for="passwordInput"><i class="ri-lock-line"></i> Senha</label>
+            <input id="passwordInput" type="password" placeholder="********" required />
+          </div>
+          <button class="btn primary" type="submit">
+            <i class="ri-login-circle-line"></i> Entrar com e-mail
+          </button>
+        </form>
+
+        <p class="hint">
+          * Login por e-mail é apenas local (demo). Login Google é real via Firebase.
+        </p>
+      </section>
+
+      <!-- CHAT -->
+      <section id="chatPage" class="panel hidden">
+        <header class="chat-header">
+          <div class="user-info">
+            <div id="userAvatar" class="avatar">B</div>
+            <div>
+              <div id="userName" class="user-name">Usuário</div>
+              <div id="userEmail" class="user-email">email@example.com</div>
+            </div>
+          </div>
+
+          <button id="logoutBtn" class="btn icon" title="Sair">
+            <i class="ri-logout-circle-r-line"></i>
+          </button>
+        </header>
+
+        <section id="messages" class="messages"></section>
+
+        <footer class="chat-input">
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Digite sua mensagem e pressione Enter..."
+            autocomplete="off"
+          />
+          <button id="sendBtn" class="btn send">
+            <i class="ri-send-plane-fill"></i>
+          </button>
+        </footer>
+
+        <p class="hint">
+          Não envie dados sensíveis. Este é um ambiente de testes do Borges IA.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="firebase-auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -6,19 +6,22 @@
     <title>TDR STORE - Trocação de Tiro no RJ</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- ESTILO GERAL (TDR VIBE) --- */
+        /* --- ESTILO GERAL (TDR GOLD VIBE) --- */
         :root {
-            --primary: #00ff88; /* Verde Neon */
+            --primary: #FFD700; /* Dourado / Amarelo Rico */
             --discord: #5865F2; /* Azul Discord */
             --bg-dark: #0a0a0a;
-            --card-bg: rgba(20, 20, 20, 0.95);
-            --text-color: #e0e0e0;
+            --card-bg: rgba(0, 0, 0, 0.6); /* Mais transparente para o efeito vidro */
+            --text-color: #ffffff;
         }
 
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: #000;
-            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            /* Fundo com sobreposição amarela leve */
+            background: linear-gradient(rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.9)), 
+                        url('https://i.imgur.com/3M34hi2.png') no-repeat center center fixed;
+            background-size: cover;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -43,55 +46,56 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: url('https://imgur.com/E3F8zlQ.png') no-repeat center center; 
-            background-size: cover;
-        }
-
-        /* Overlay escuro no login */
-        #login-screen::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: -1;
         }
 
         .login-box {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 40px;
-            border-radius: 10px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            /* Efeito Glassmorphism (Vidro) */
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 50px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Borda fina dourada */
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
             width: 90%;
-            max-width: 400px;
-            backdrop-filter: blur(5px);
+            max-width: 450px;
+            backdrop-filter: blur(15px); /* O Desfoque mágico */
+            -webkit-backdrop-filter: blur(15px);
         }
 
         .login-input {
             width: 100%;
             padding: 15px;
-            margin: 20px 0;
-            background: #111;
-            border: 1px solid #444;
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #555;
+            border-radius: 5px;
             color: white;
             font-size: 1.2rem;
             text-align: center;
             box-sizing: border-box; 
             outline: none;
+            transition: 0.3s;
         }
-        .login-input:focus { border-color: var(--primary); }
+        .login-input:focus { 
+            border-color: var(--primary); 
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
 
         .btn-start {
             width: 100%;
             padding: 15px;
-            background: var(--primary);
+            background: linear-gradient(45deg, #FFD700, #FFA500); /* Degradê Dourado */
             border: none;
             color: #000;
             font-size: 1.2rem;
             border-radius: 5px;
             font-weight: 800;
+            letter-spacing: 1px;
         }
-        .btn-start:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--primary); }
+        .btn-start:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); 
+        }
 
         /* --- DASHBOARD (LOJA) --- */
         #dashboard { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; }
@@ -100,14 +104,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 20px;
             margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 15px;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
         }
 
-        .logo h2 { font-size: 2rem; }
+        .logo h2 { font-size: 2rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
         
         .header-actions { display: flex; align-items: center; gap: 15px; }
 
@@ -122,8 +130,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: 0.3s;
         }
-        .btn-discord:hover { background-color: #4752c4; }
+        .btn-discord:hover { background-color: #4752c4; transform: translateY(-2px); }
 
         .btn-logout { background: #dc3545; border: none; padding: 10px 15px; color: white; border-radius: 5px; }
 
@@ -131,9 +140,10 @@
         .section-title {
             border-left: 5px solid var(--primary);
             padding-left: 15px;
-            margin: 40px 0 20px 0;
-            font-size: 1.5rem;
+            margin: 50px 0 20px 0;
+            font-size: 1.8rem;
             color: #fff;
+            text-shadow: 2px 2px 4px #000;
         }
 
         .grid {
@@ -144,31 +154,38 @@
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid #333;
+            background: var(--card-bg); /* Fundo Transparente */
+            border: 1px solid rgba(255, 255, 255, 0.1);
             width: 260px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 10px;
             position: relative;
             overflow: hidden;
             transition: 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            backdrop-filter: blur(10px); /* Vidro nos cards */
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,255,136,0.1); }
+        .card:hover { 
+            border-color: var(--primary); 
+            transform: translateY(-8px); 
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15); 
+            background: rgba(0, 0, 0, 0.8);
+        }
 
-        .card h3 { color: #fff; font-size: 1.2rem; }
-        .card p { color: #888; font-size: 0.9rem; margin: 5px 0; }
+        .card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 5px; }
+        .card p { color: #ccc; font-size: 0.95rem; margin: 5px 0; }
 
         .price-tag {
             font-size: 1.8rem;
             color: var(--primary);
             font-weight: bold;
             margin: 15px 0;
-            text-shadow: 0 0 10px rgba(0,255,136,0.2);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
         }
 
         .btn-buy {
@@ -178,48 +195,59 @@
             border: 2px solid var(--primary);
             color: var(--primary);
             font-weight: bold;
+            border-radius: 5px;
         }
-        .btn-buy:hover { background: var(--primary); color: #000; }
+        .btn-buy:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
 
         /* Cores Especiais para Dinheiro */
-        .money-card .price-tag { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-        .money-card .btn-buy { border-color: #ffd700; color: #ffd700; }
-        .money-card .btn-buy:hover { background: #ffd700; color: #000; }
-        .money-card:hover { border-color: #ffd700; }
+        .money-card .price-tag { color: #2ecc71; text-shadow: 0 0 10px rgba(46, 204, 113, 0.3); }
+        .money-card .btn-buy { border-color: #2ecc71; color: #2ecc71; }
+        .money-card .btn-buy:hover { background: #2ecc71; color: #000; box-shadow: 0 0 15px #2ecc71; }
+        .money-card:hover { border-color: #2ecc71; }
 
         /* --- HISTÓRICO --- */
-        #history-section { margin-top: 60px; background: #111; padding: 20px; border-radius: 10px; border: 1px solid #333; }
+        #history-section { 
+            margin-top: 60px; 
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 30px; 
+            border-radius: 10px; 
+            border: 1px solid #333; 
+            backdrop-filter: blur(5px);
+        }
         .history-item {
             display: flex;
             justify-content: space-between;
-            background: #1a1a1a;
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
             margin-bottom: 8px;
-            border-left: 4px solid var(--discord);
+            border-left: 4px solid var(--primary);
             align-items: center;
+            border-radius: 0 5px 5px 0;
         }
-        .history-token { font-family: monospace; color: #aaa; background: #000; padding: 5px; border-radius: 4px; }
+        .history-token { font-family: monospace; color: #fff; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 4px; border: 1px solid #333; }
 
         /* --- MODAL PIX --- */
         #pix-modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.9);
             justify-content: center;
             align-items: center;
             z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: #151515;
-            padding: 30px;
+            background: #111;
+            padding: 40px;
             border: 1px solid var(--primary);
             text-align: center;
             max-width: 450px;
             width: 90%;
             position: relative;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
         }
 
         .pix-key {
@@ -232,12 +260,15 @@
             font-family: monospace;
             cursor: pointer;
             font-size: 1.1rem;
+            transition: 0.2s;
         }
+        .pix-key:hover { border-color: var(--primary); background: #0a0a0a; }
 
-        .btn-confirm { background: var(--primary); color: black; border: none; padding: 15px 30px; width: 100%; font-size: 1.1rem; font-weight: bold; border-radius: 5px; }
-        .btn-confirm:hover { background: #00cc6a; }
+        .btn-confirm { background: var(--primary); color: black; border: none; padding: 15px 30px; width: 100%; font-size: 1.1rem; font-weight: bold; border-radius: 5px; margin-top: 10px; }
+        .btn-confirm:hover { background: #ffea00; box-shadow: 0 0 20px var(--primary); }
         
-        .btn-close { position: absolute; top: 10px; right: 10px; background: none; border: none; color: white; font-size: 2rem; }
+        .btn-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #777; font-size: 2rem; cursor: pointer; }
+        .btn-close:hover { color: white; }
 
     </style>
 </head>
@@ -245,11 +276,11 @@
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color:white; margin-bottom: 5px;">TDR <span style="color:var(--primary)">STORE</span></h1>
-            <p style="color: #888; margin-top:0;">TROCAÇÃO DE TIRO NO RJ</p>
+            <h1 style="color:white; margin-bottom: 5px; text-shadow: 0 0 10px black;">TDR <span style="color:var(--primary)">STORE</span></h1>
+            <p style="color: #ccc; margin-top:0; letter-spacing: 3px; font-size: 0.8rem;">TROCAÇÃO DE TIRO NO RJ</p>
             
             <input type="text" id="discordInput" class="login-input" placeholder="DIGITE SEU NICK DO DISCORD">
-            <button class="btn-start" onclick="fazerLogin()">ENTRAR NO SISTEMA</button>
+            <button class="btn-start" onclick="fazerLogin()">ACESSAR SISTEMA</button>
         </div>
     </div>
 
@@ -266,8 +297,8 @@
                 </a>
 
                 <div style="text-align: right;">
-                    <span style="display:block; font-size: 0.8rem; color:#888;">LOGADO COMO:</span>
-                    <span id="userNameDisplay" style="color:var(--primary); font-weight: bold; font-size: 1.1rem;"></span>
+                    <span style="display:block; font-size: 0.8rem; color:#aaa;">LOGADO COMO:</span>
+                    <span id="userNameDisplay" style="color:var(--primary); font-weight: bold; font-size: 1.1rem; text-shadow: 0 0 5px rgba(255,215,0,0.5);"></span>
                 </div>
                 <button class="btn-logout" onclick="fazerLogout()">X</button>
             </div>
@@ -295,13 +326,13 @@
             </div>
             <div class="card">
                 <h3>FAL GOLD</h3>
-                <p>O Poder Dourado (Dano Alto)</p>
+                <p>O Poder Dourado</p>
                 <div class="price-tag">R$ 23,00</div>
                 <button class="btn-buy" onclick="abrirModal('FAL Gold', 23.00)">COMPRAR</button>
             </div>
         </div>
 
-        <h2 class="section-title" style="border-color: #ffd700; margin-top: 60px;">BANCO TDR (DINHEIRO)</h2>
+        <h2 class="section-title" style="border-color: #2ecc71; margin-top: 60px;">BANCO TDR (DINHEIRO)</h2>
         <div class="grid">
             <div class="card money-card">
                 <h3>25.000</h3>
@@ -330,7 +361,7 @@
         </div>
 
         <div id="history-section">
-            <h3 style="margin-bottom:15px; color: #fff;">MEUS PEDIDOS (SALVOS)</h3>
+            <h3 style="margin-bottom:15px; color: #fff; border-bottom: 1px solid #444; padding-bottom:10px;">MEUS PEDIDOS (SALVOS)</h3>
             <div id="history-list">
                 </div>
         </div>
@@ -339,7 +370,7 @@
     <div id="pix-modal">
         <div class="modal-content">
             <button class="btn-close" onclick="fecharModal()">×</button>
-            <h2 style="color:white;">PAGAMENTO PIX</h2>
+            <h2 style="color:white; text-shadow: 0 0 10px rgba(255,255,255,0.3);">PAGAMENTO PIX</h2>
             <p>Item: <span id="modal-produto" style="color:var(--primary); font-weight: bold;"></span></p>
             <p>Valor: <span id="modal-valor" style="color:white; font-weight: bold;"></span></p>
             
@@ -351,10 +382,10 @@
             <button class="btn-confirm" id="btnConfirmar" onclick="confirmarPagamento()">JÁ FIZ O PAGAMENTO</button>
             
             <div id="result-area" style="display:none; margin-top:20px;">
-                <p style="color: #00ff88; font-size: 1.2rem;">✅ Pagamento Enviado!</p>
-                <div style="background:#222; padding:15px; margin: 10px 0; border: 1px solid #444;">
-                    <span style="display:block; font-size: 0.8rem; color:#888;">SEU TOKEN DE RESGATE:</span>
-                    <span id="token-final" style="color: white; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px;"></span>
+                <p style="color: #2ecc71; font-size: 1.2rem; font-weight: bold;">✅ Pagamento Enviado!</p>
+                <div style="background:rgba(0,0,0,0.5); padding:15px; margin: 10px 0; border: 1px solid #444; border-radius: 5px;">
+                    <span style="display:block; font-size: 0.8rem; color:#aaa; margin-bottom: 5px;">SEU TOKEN DE RESGATE:</span>
+                    <span id="token-final" style="color: #fff; font-weight: bold; font-size: 1.4rem; letter-spacing: 3px; font-family: monospace;"></span>
                 </div>
                 <p style="font-size:12px; color: #ccc;">Tire print dessa tela e abra um ticket no Discord.</p>
             </div>
@@ -466,7 +497,7 @@
             lista.innerHTML = "";
             
             if (userHistory.length === 0) {
-                lista.innerHTML = '<p style="color:#555; font-style:italic;">Nenhuma compra registrada neste PC.</p>';
+                lista.innerHTML = '<p style="color:#aaa; font-style:italic; text-align:center;">Nenhuma compra registrada neste PC.</p>';
                 return;
             }
 
@@ -476,7 +507,7 @@
                 div.innerHTML = `
                     <div>
                         <strong style="color:white; display:block;">${compra.item}</strong>
-                        <small style="color:#777;">${compra.data}</small>
+                        <small style="color:#ccc;">${compra.data}</small>
                     </div>
                     <span class="history-token">${compra.token}</span>
                 `;
@@ -492,7 +523,7 @@
                 embeds: [
                     {
                         title: "Confirmar Pagamento PIX",
-                        color: 5763719, // Verde Matrix
+                        color: 16766720, // Dourado
                         fields: [
                             { name: "👤 Jogador", value: currentUser, inline: true },
                             { name: "📦 Produto", value: selectedProduct, inline: true },

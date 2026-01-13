@@ -3,667 +3,599 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TDR STORE | Elite Arsenal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>ZDG | Zona De Guerra Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700;800&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- RESET & VARIAVEIS --- */
+        /* --- DESIGN SYSTEM (TEMA OCEANO PROFUNDO) --- */
         :root {
-            --primary: #FFD700; /* Dourado Premium */
-            --primary-hover: #ffea00;
-            --dark-bg: #050505;
-            --glass: rgba(20, 20, 20, 0.85);
-            --glass-border: rgba(255, 215, 0, 0.2);
-            --text: #ffffff;
-            --discord: #5865F2;
-            --success: #2ecc71;
+            --neon-blue: #00f2ff;       /* Ciano Elétrico (Destaque) */
+            --deep-ocean: #0044ff;      /* Azul Profundo (Secundário) */
+            --dark-navy: #020b14;       /* Fundo quase preto */
+            --surface: rgba(4, 22, 43, 0.75); /* Vidro Naval */
+            --surface-border: rgba(0, 242, 255, 0.15);
+            --text-main: #e0f7ff;
+            --text-muted: #8ab4cc;
+            --success: #00ff9d;
+            --danger: #ff2a6d;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background-color: var(--dark-bg);
-            /* Background Tático Escuro */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.95)), 
-                        url('https://imgur.com/E3F8zlQ.png') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text);
+            background-color: var(--dark-navy);
+            color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
+            /* Padrão de Grid Tático (CSS Puro, sem imagem externa para não quebrar) */
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(0, 68, 255, 0.15), transparent 70%);
+            background-size: 40px 40px, 40px 40px, 100% 100%;
         }
 
-        /* Scrollbar Personalizada */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        /* Títulos em Oxanium parecem mais "Militar/Futurista" */
+        h1, h2, h3, .brand-font { font-family: 'Oxanium', cursive; text-transform: uppercase; }
 
         /* Utilitários */
         .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        
+        /* Animação de entrada suave */
+        .fade-in { animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* --- UI ELEMENTS --- */
-        button {
+        /* --- BOTÕES --- */
+        .btn {
+            border: none;
             cursor: pointer;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 700;
             text-transform: uppercase;
+            padding: 12px 24px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             transition: all 0.3s ease;
-            outline: none;
-        }
-
-        /* --- TELA DE LOGIN --- */
-        #login-screen {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .login-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--glass-border);
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
             position: relative;
             overflow: hidden;
         }
 
-        /* Efeito de brilho passando no card */
-        .login-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
-            transition: 0.5s;
+        .btn-primary {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
         }
-        .login-card:hover::before { left: 100%; }
 
-        .login-card h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        .btn-primary:hover {
+            background: var(--neon-blue);
+            color: var(--dark-navy);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+            transform: translateY(-2px);
         }
-        
-        .login-card p { color: #888; letter-spacing: 4px; font-weight: 600; margin-bottom: 2rem; }
 
-        .input-group { position: relative; margin-bottom: 1.5rem; }
-        
-        .login-input {
+        .btn-discord {
+            background: #5865F2;
+            color: white;
+            border-radius: 4px; /* Discord usa cantos arredondados, mantendo fiel */
+            clip-path: none; 
+            font-size: 0.9rem;
+            display: flex; gap: 8px; align-items: center;
+        }
+        .btn-discord:hover { background: #4752c4; }
+
+        /* --- LOGIN SCREEN --- */
+        #login-screen {
+            height: 100vh;
             width: 100%;
+            position: fixed;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-box {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            padding: 3rem;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            position: relative;
+            /* Borda brilhante apenas no topo */
+            border-top: 3px solid var(--neon-blue);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .login-box::before {
+            content: "SYSTEM LOGIN // ZDG";
+            position: absolute;
+            top: -12px; left: 20px;
+            background: var(--dark-navy);
+            padding: 0 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: 'Oxanium';
+            border: 1px solid var(--surface-border);
+        }
+
+        .logo-area h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(180deg, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+            letter-spacing: -2px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #334;
             padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #333;
-            border-radius: 5px;
             color: #fff;
+            font-family: 'Oxanium';
             font-size: 1.1rem;
             text-align: center;
             transition: 0.3s;
         }
-        
-        .login-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
-            background: rgba(0,0,0,0.8);
-        }
 
-        .btn-gold {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: #000;
-            font-weight: 800;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            letter-spacing: 1px;
-        }
-        .btn-gold:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        .input-field:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
         }
 
         /* --- DASHBOARD --- */
-        #dashboard {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        #dashboard { max-width: 1280px; margin: 0 auto; padding: 20px; }
 
-        header {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--glass);
-            padding: 20px 30px;
-            border-radius: 12px;
-            border-bottom: 2px solid var(--primary);
+            background: linear-gradient(90deg, var(--surface) 0%, rgba(4,22,43,0.4) 100%);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 15px 30px;
             margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
-        .user-info {
+        .user-profile {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .user-badge {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
+        .avatar-placeholder {
+            width: 40px; height: 40px;
+            background: var(--neon-blue);
+            color: var(--dark-navy);
+            display: flex; align-items: center; justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            clip-path: polygon(30% 0, 100% 0, 100% 70%, 70% 100%, 0 100%, 0 30%);
         }
 
-        .btn-discord {
-            background: var(--discord);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
+        /* --- GRID DE PRODUTOS --- */
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--neon-blue);
+            padding-left: 15px;
         }
-        .btn-discord:hover { background: #4752c4; }
+        .section-header h2 { font-size: 1.8rem; color: #fff; }
+        .section-header span { color: var(--neon-blue); font-size: 0.9rem; letter-spacing: 2px; }
 
-        .btn-logout {
-            background: transparent;
-            border: 1px solid #dc3545;
-            color: #dc3545;
-            width: 35px; height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-logout:hover { background: #dc3545; color: white; }
-
-        /* SEÇÕES */
-        .section-title {
-            font-size: 2rem;
-            margin: 50px 0 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #fff;
-        }
-        .section-title::before {
-            content: '';
-            width: 5px; height: 35px;
-            background: var(--primary);
-            display: block;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        /* GRID DE PRODUTOS */
-        .grid {
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
         }
 
         .card {
-            background: var(--glass);
+            background: var(--surface);
             border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 25px;
+            padding: 20px;
+            position: relative;
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
+            justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            background: rgba(4, 22, 43, 0.9);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .card-icon {
-            font-size: 3rem;
-            color: #555;
+        /* Tag "Exclusivo" ou "Novo" */
+        .card-tag {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--deep-ocean);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            font-weight: bold;
+        }
+
+        .icon-box {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--text-muted);
             margin-bottom: 15px;
             transition: 0.3s;
         }
-        .card:hover .card-icon { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        .card:hover .icon-box { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
 
-        .card h3 { font-size: 1.4rem; margin-bottom: 5px; }
-        .card p { color: #999; font-size: 0.9rem; margin-bottom: 20px; min-height: 40px;}
+        .card h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; }
 
-        .price {
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: 700;
+        .price-tag {
+            font-family: 'Oxanium';
+            font-size: 1.5rem;
+            color: #fff;
             margin-bottom: 15px;
+            display: block;
         }
 
-        .btn-buy {
-            width: 100%;
-            padding: 12px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        .btn-buy:hover { background: var(--primary); color: #000; }
-
-        /* Estilo Especial para Dinheiro */
-        .money-card:hover { border-color: var(--success); }
-        .money-card .price { color: var(--success); }
-        .money-card .btn-buy { border-color: var(--success); color: var(--success); }
-        .money-card .btn-buy:hover { background: var(--success); color: #000; }
-        .money-card:hover .card-icon { color: var(--success); text-shadow: 0 0 10px var(--success); }
-
-
-        /* --- HISTÓRICO --- */
-        .history-box {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #222;
-            transition: 0.2s;
-        }
-        .history-item:last-child { border: none; }
-        .history-item:hover { background: #1a1a1a; }
-        
-        .token-badge {
-            font-family: monospace;
-            background: #000;
-            padding: 5px 10px;
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: var(--primary);
-        }
-
-        /* --- MODAL --- */
-        #modal-overlay {
+        /* --- MODAL DE PAGAMENTO --- */
+        .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.85);
+            z-index: 999;
             backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .modal-box {
-            background: #151515;
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid var(--primary);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
+        .modal-content {
+            background: #050f1a;
+            border: 1px solid var(--neon-blue);
+            width: 95%; max-width: 500px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1);
         }
 
-        .pix-area {
-            background: #050505;
-            padding: 20px;
-            border: 1px dashed #444;
+        .pix-container {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px dashed var(--text-muted);
+            padding: 15px;
             margin: 20px 0;
-            border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.2s;
         }
-        .pix-area:hover { border-color: var(--primary); background: #0a0a0a; }
-        
-        .pix-code { font-family: monospace; color: var(--primary); word-break: break-all; font-size: 1.1rem; }
+        .pix-container:hover { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.1); }
+        .pix-key { font-family: monospace; color: var(--neon-blue); word-break: break-all; }
 
-        /* --- TOAST NOTIFICATION (Substituto do Alert) --- */
+        /* --- TOAST --- */
         #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #333;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--dark-navy);
+            border: 1px solid var(--neon-blue);
             color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 16px;
-            position: fixed;
+            padding: 12px 30px;
             z-index: 2000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 17px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            border-left: 5px solid var(--primary);
+            opacity: 0; pointer-events: none;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
         }
+        #toast.active { opacity: 1; bottom: 50px; }
 
-        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-
+        /* Responsividade */
+        @media(max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; text-align: center; }
+            .section-header { flex-direction: column; align-items: flex-start; }
+            .modal-content { width: 90%; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="toast">Notificação aqui...</div>
+    <div id="toast"><i class="fas fa-info-circle"></i> <span id="toast-msg">Mensagem</span></div>
 
-    <div id="login-screen">
-        <div class="login-card fade-in">
-            <h1>TDR <span style="color:var(--primary)">STORE</span></h1>
-            <p>SISTEMA DE ARSENAL PRIVADO</p>
-            
-            <div class="input-group">
-                <input type="text" id="discordInput" class="login-input" placeholder="Seu Nick do Discord" autocomplete="off">
+    <div id="login-screen" class="flex-center">
+        <div class="login-box fade-in">
+            <div class="logo-area">
+                <h1>ZDG</h1>
+                <p style="color:var(--text-muted); letter-spacing: 5px; font-weight:bold;">ZONA DE GUERRA</p>
             </div>
-            
-            <button class="btn-gold" onclick="fazerLogin()">ENTRAR NO SISTEMA</button>
+
+            <div class="input-wrapper">
+                <input type="text" id="discordNick" class="input-field" placeholder="DIGITE SEU USER DO DISCORD" autocomplete="off">
+            </div>
+
+            <button onclick="login()" class="btn btn-primary" style="width:100%">ACESSAR ARSENAL</button>
+            <p style="margin-top: 15px; font-size: 0.8rem; color: #556;">Acesso restrito a membros autorizados.</p>
         </div>
     </div>
 
     <div id="dashboard" class="hidden">
-        <header class="fade-in">
-            <div class="user-info">
-                <h2 style="color: #fff;">TDR <span style="color:var(--primary)">STORE</span></h2>
-                <div class="user-badge" id="userNameDisplay">Visitante</div>
+        
+        <nav class="navbar fade-in">
+            <div class="brand-font" style="font-size: 1.5rem;">
+                <span style="color:var(--neon-blue)">ZDG</span> STORE
             </div>
-            
-            <div style="display:flex; gap:10px; align-items:center;">
-                <a href="https://discord.gg/KRDQGqPUGG" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> Comunidade
+
+            <div class="user-profile">
+                <div class="avatar-placeholder"><i class="fas fa-user"></i></div>
+                <div style="line-height: 1.2;">
+                    <span id="userDisplay" style="display:block; font-weight:bold; color:#fff;">Jogador</span>
+                    <span style="font-size:0.75rem; color:var(--text-muted);">Membro Verificado</span>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+                <a href="#" class="btn btn-discord" style="text-decoration: none; padding: 8px 15px;">
+                    <i class="fab fa-discord"></i> DISCORD
                 </a>
-                <button class="btn-logout" onclick="fazerLogout()" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
+                <button onclick="logout()" class="btn" style="padding: 8px; border:1px solid #333; color: #cc5555;">
+                    <i class="fas fa-power-off"></i>
                 </button>
             </div>
-        </header>
+        </nav>
 
-        <h2 class="section-title fade-in">ARSENAL TÁTICO</h2>
-        <div class="grid fade-in">
+        <div class="section-header fade-in">
+            <h2>ARSENAL LETAL</h2>
+            <span>// CLASSE S</span>
+        </div>
+
+        <div class="products-grid fade-in">
             <div class="card">
-                <i class="fas fa-crosshairs card-icon"></i>
-                <h3>AK-47 ISRAEL</h3>
-                <p>Compacta, alta cadência e precisão letal.</p>
-                <div class="price">R$ 8,00</div>
-                <button class="btn-buy" onclick="abrirModal('AK-47 Israel', 8.00)">ADQUIRIR</button>
+                <div class="card-tag">META</div>
+                <div class="icon-box"><i class="fas fa-skull"></i></div>
+                <h3>FUZIL M4A1 MARINE</h3>
+                <p>Skin camuflada oceânica com silenciador integrado. Dano elevado.</p>
+                <span class="price-tag">R$ 12,00</span>
+                <button onclick="openModal('M4A1 Marine', 12.00)" class="btn btn-primary">COMPRAR</button>
             </div>
+
             <div class="card">
-                <i class="fas fa-star card-icon"></i>
-                <h3>AK PRATA</h3>
-                <p>Acabamento cromado de luxo para chefes.</p>
-                <div class="price">R$ 11,00</div>
-                <button class="btn-buy" onclick="abrirModal('AK Prata', 11.00)">ADQUIRIR</button>
+                <div class="icon-box"><i class="fas fa-crosshairs"></i></div>
+                <h3>SNIPER L115A3</h3>
+                <p>Precisão cirúrgica. One shot, one kill. Acompanha mira 8x.</p>
+                <span class="price-tag">R$ 18,00</span>
+                <button onclick="openModal('Sniper L115A3', 18.00)" class="btn btn-primary">COMPRAR</button>
             </div>
+
             <div class="card">
-                <i class="fas fa-bullseye card-icon"></i>
-                <h3>MCX TÁTICA</h3>
-                <p>Equipada com mira holográfica e supressor.</p>
-                <div class="price">R$ 16,00</div>
-                <button class="btn-buy" onclick="abrirModal('MCX Tática', 16.00)">ADQUIRIR</button>
+                <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                <h3>COLETE PESADO ZDG</h3>
+                <p>Proteção balística nível 4. Tanka tiros de fuzil.</p>
+                <span class="price-tag">R$ 10,00</span>
+                <button onclick="openModal('Colete Pesado', 10.00)" class="btn btn-primary">COMPRAR</button>
             </div>
+
             <div class="card">
-                <i class="fas fa-crown card-icon"></i>
-                <h3>FAL GOLD</h3>
-                <p>O maior dano do jogo com skin Dourada.</p>
-                <div class="price">R$ 23,00</div>
-                <button class="btn-buy" onclick="abrirModal('FAL Gold', 23.00)">ADQUIRIR</button>
+                <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                <h3>GLOCK AUTOMÁTICA</h3>
+                <p>Pistola com seletor de rajada. Ideal para confrontos de perto.</p>
+                <span class="price-tag">R$ 8,50</span>
+                <button onclick="openModal('Glock Auto', 8.50)" class="btn btn-primary">COMPRAR</button>
             </div>
         </div>
 
-        <h2 class="section-title fade-in" style="margin-top: 60px; color: var(--success);">BANCO TDR</h2>
-        <style>.section-title[style*="success"]::before { background: var(--success); box-shadow: 0 0 10px var(--success); }</style>
-        
-        <div class="grid fade-in">
-            <div class="card money-card">
-                <i class="fas fa-money-bill-wave card-icon"></i>
-                <h3>25.000</h3>
-                <p>Dinheiro limpo para iniciantes.</p>
-                <div class="price">R$ 14,00</div>
-                <button class="btn-buy" onclick="abrirModal('25k Dinheiro', 14.00)">ADQUIRIR</button>
+        <div class="section-header fade-in" style="margin-top: 50px;">
+            <h2 style="color: var(--success)">RECURSOS FINANCEIROS</h2>
+            <span style="color: var(--success)">// DINHEIRO SUJO</span>
+        </div>
+        <style>.card.money:hover { border-color: var(--success); } .card.money:hover .icon-box { color: var(--success); text-shadow: 0 0 15px var(--success); }</style>
+
+        <div class="products-grid fade-in">
+            <div class="card money">
+                <div class="icon-box"><i class="fas fa-sack-dollar"></i></div>
+                <h3>$100.000 CASH</h3>
+                <p>Pacote inicial para comprar carros e armas básicas.</p>
+                <span class="price-tag" style="color:var(--success)">R$ 15,00</span>
+                <button onclick="openModal('100k Cash', 15.00)" class="btn btn-primary" style="border-color:var(--success); color:var(--success)">ADQUIRIR</button>
             </div>
-            <div class="card money-card">
-                <i class="fas fa-briefcase card-icon"></i>
-                <h3>50.000</h3>
-                <p>Uma mala cheia de notas.</p>
-                <div class="price">R$ 38,00</div>
-                <button class="btn-buy" onclick="abrirModal('50k Dinheiro', 38.00)">ADQUIRIR</button>
-            </div>
-            <div class="card money-card">
-                <i class="fas fa-vault card-icon"></i>
-                <h3>80.000</h3>
-                <p>Segurança financeira para sua facção.</p>
-                <div class="price">R$ 53,00</div>
-                <button class="btn-buy" onclick="abrirModal('80k Dinheiro', 53.00)">ADQUIRIR</button>
-            </div>
-            <div class="card money-card">
-                <i class="fas fa-city card-icon"></i>
-                <h3>100.000</h3>
-                <p>Vida de patrão. Compre tudo.</p>
-                <div class="price">R$ 75,00</div>
-                <button class="btn-buy" onclick="abrirModal('100k Dinheiro', 75.00)">ADQUIRIR</button>
+
+            <div class="card money">
+                <div class="card-tag" style="background:var(--success); color:#000;">POPULAR</div>
+                <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+                <h3>$500.000 CASH</h3>
+                <p>Dinheiro suficiente para fundar sua própria facção.</p>
+                <span class="price-tag" style="color:var(--success)">R$ 45,00</span>
+                <button onclick="openModal('500k Cash', 45.00)" class="btn btn-primary" style="border-color:var(--success); color:var(--success)">ADQUIRIR</button>
             </div>
         </div>
 
-        <div class="fade-in" style="margin-top: 60px;">
-            <h3 style="color:#888; margin-bottom: 15px; text-transform: uppercase; font-size: 0.9rem;">Meus Pedidos Recentes</h3>
-            <div class="history-box" id="history-list">
+        <div class="fade-in" style="margin-top: 60px; border-top: 1px solid #222; padding-top: 20px;">
+            <h3 style="color: #555; font-size: 0.9rem;">SEUS REGISTROS RECENTES</h3>
+            <div id="history-container" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
                 </div>
         </div>
     </div>
 
-    <div id="modal-overlay" class="hidden">
-        <div class="modal-box fade-in">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h2 style="color: #fff;">CONFIRMAR PEDIDO</h2>
-                <button onclick="fecharModal()" style="background:none; border:none; color:#555; font-size:1.5rem;"><i class="fas fa-times"></i></button>
+    <div id="modal-pagamento" class="modal-overlay hidden">
+        <div class="modal-content fade-in">
+            <div style="display:flex; justify-content:space-between; margin-bottom: 20px;">
+                <h3 style="color:#fff;">CONFIRMAR AQUISIÇÃO</h3>
+                <button onclick="closeModal()" style="background:none; border:none; color:#555; cursor:pointer;"><i class="fas fa-times fa-lg"></i></button>
             </div>
 
-            <p style="color:#aaa;">Você está comprando:</p>
-            <h3 id="modal-produto" style="color:var(--primary); font-size: 1.5rem; margin: 5px 0;">ITEM</h3>
-            <h2 id="modal-valor" style="color:#fff;">R$ 00,00</h2>
-
-            <div class="pix-area" onclick="copiarPix()">
-                <p style="color:#888; font-size:0.8rem; margin-bottom:5px;">CLIQUE PARA COPIAR A CHAVE PIX:</p>
-                <div class="pix-code">39505f23-b744-44d1-a8d8-1d1b456b2504</div>
-                <p style="color:var(--primary); font-size:0.7rem; margin-top:5px;"><i class="fas fa-copy"></i> Copiar Código</p>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p style="color:var(--text-muted); font-size:0.9rem;">ITEM SELECIONADO</p>
+                <h2 id="modal-item" style="color:var(--neon-blue); font-size:1.8rem; margin: 5px 0;">NOME DO ITEM</h2>
+                <h3 id="modal-price" style="color:#fff;">R$ 00,00</h3>
             </div>
 
-            <button id="btnConfirmar" class="btn-gold" onclick="confirmarPagamento()">JÁ FIZ O PIX</button>
-
-            <div id="result-area" class="hidden" style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
-                <p style="color: var(--success); font-weight: bold; font-size: 1.2rem;"><i class="fas fa-check-circle"></i> Pedido Registrado!</p>
-                <div style="background:#000; padding:15px; margin: 15px 0; border: 1px solid #333; border-radius: 5px;">
-                    <span style="display:block; font-size: 0.8rem; color:#666; margin-bottom: 5px;">SEU TOKEN (TIRE PRINT):</span>
-                    <span id="token-final" style="color: #fff; font-weight: bold; font-size: 1.4rem; letter-spacing: 2px; font-family: monospace;"></span>
+            <div class="pix-container" onclick="copyPix()">
+                <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <span style="font-size: 0.8rem; color:#888;">CHAVE PIX (CLIQUE PARA COPIAR)</span>
+                    <i class="fas fa-copy" style="color:var(--neon-blue)"></i>
                 </div>
-                <p style="color:#666; font-size: 0.8rem;">Abra um ticket no Discord e envie este print.</p>
+                <div class="pix-key">39505f23-b744-44d1-a8d8-1d1b456b2504</div>
+            </div>
+
+            <button id="btn-confirmar" onclick="confirmPayment()" class="btn btn-primary" style="width:100%; background: var(--neon-blue); color: #000;">
+                JÁ REALIZEI O PAGAMENTO
+            </button>
+
+            <div id="payment-success" class="hidden" style="text-align: center; margin-top: 20px;">
+                <div style="color: var(--success); font-size: 3rem; margin-bottom: 10px;"><i class="fas fa-check-circle"></i></div>
+                <p style="color:#fff; font-weight: bold;">PEDIDO ENVIADO!</p>
+                <div style="background:#000; border: 1px solid #333; padding: 10px; margin-top: 10px;">
+                    <small style="color:#666; display:block;">SEU TOKEN DE RESGATE:</small>
+                    <span id="final-token" style="font-family:monospace; color:var(--neon-blue); font-size:1.2rem; letter-spacing: 2px;">---</span>
+                </div>
+                <p style="font-size: 0.8rem; color:#666; margin-top: 10px;">Tire print e envie no canal de compras.</p>
             </div>
         </div>
     </div>
 
     <script>
         // CONFIGURAÇÃO
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1455701150232744160/KMjlr0_hErGYRrgN5AMKa2KSXluZHm_fZW8WWZE9PN3YvtBepZWuQ-ACvCQsE_bN6Na6";
-
+        // IMPORTANTE: Troque a URL abaixo pela sua se tiver mudado
+        const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1455701150232744160/KMjlr0_hErGYRrgN5AMKa2KSXluZHm_fZW8WWZE9PN3YvtBepZWuQ-ACvCQsE_bN6Na6";
+        
+        // ESTADO
         let currentUser = null;
-        let selectedProduct = null;
-        let selectedPrice = 0;
-        let userHistory = [];
+        let currentItem = null;
+        let currentPrice = 0;
 
-        // TOAST NOTIFICATION
-        function showToast(message, type = 'normal') {
-            const x = document.getElementById("toast");
-            x.innerText = message;
-            x.style.borderLeftColor = type === 'success' ? 'var(--success)' : 'var(--primary)';
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-
-        // INIT
-        window.onload = function() {
-            const savedData = localStorage.getItem('tdr_save_v3');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                if (data.nick) {
-                    document.getElementById('discordInput').value = data.nick;
-                    // Auto login opcional, deixei manual para o efeito visual
-                }
-            }
-        };
-
-        // LOGIN
-        function fazerLogin() {
-            const nick = document.getElementById('discordInput').value.trim();
-            if (!nick) {
-                showToast("❌ Digite seu nick do Discord!");
-                return;
-            }
+        // SISTEMA DE LOGIN
+        function login() {
+            const nick = document.getElementById('discordNick').value.trim();
+            if(!nick) return showToast("Digite seu nick do Discord!", "error");
 
             currentUser = nick;
-            document.getElementById('userNameDisplay').innerText = currentUser;
-
-            // Load History
-            const savedData = localStorage.getItem('tdr_save_v3');
-            if (savedData) {
-                const parsed = JSON.parse(savedData);
-                if (parsed.nick === currentUser) {
-                    userHistory = parsed.history || [];
-                } else {
-                    userHistory = [];
-                }
-            }
-
-            // Transição
+            document.getElementById('userDisplay').innerText = nick;
+            
+            // Transição de tela
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
-            renderizarHistorico();
+            
+            loadHistory();
         }
 
-        function fazerLogout() {
-            localStorage.removeItem('tdr_save_v3');
+        function logout() {
             location.reload();
         }
 
-        // MODAL
-        function abrirModal(produto, preco) {
-            selectedProduct = produto;
-            selectedPrice = preco;
-            document.getElementById('modal-produto').innerText = produto;
-            document.getElementById('modal-valor').innerText = "R$ " + preco.toFixed(2);
+        // MODAL E COMPRA
+        function openModal(item, price) {
+            currentItem = item;
+            currentPrice = price;
+
+            document.getElementById('modal-item').innerText = item;
+            document.getElementById('modal-price').innerText = `R$ ${price.toFixed(2)}`;
             
-            // Reset state
-            document.getElementById('btnConfirmar').classList.remove('hidden');
-            document.getElementById('result-area').classList.add('hidden');
+            // Resetar visual do modal
+            document.getElementById('btn-confirmar').classList.remove('hidden');
+            document.getElementById('payment-success').classList.add('hidden');
             
-            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.getElementById('modal-pagamento').classList.remove('hidden');
         }
 
-        function fecharModal() {
-            document.getElementById('modal-overlay').classList.add('hidden');
+        function closeModal() {
+            document.getElementById('modal-pagamento').classList.add('hidden');
         }
 
-        function copiarPix() {
+        function copyPix() {
             navigator.clipboard.writeText("39505f23-b744-44d1-a8d8-1d1b456b2504");
-            showToast("✅ Chave PIX copiada!", "success");
+            showToast("Chave PIX copiada com sucesso!");
         }
 
-        function gerarToken() {
-            const p1 = Math.random().toString(36).substring(2, 6).toUpperCase();
-            const p2 = Math.random().toString(36).substring(2, 6).toUpperCase();
-            return `TDR-${p1}-${p2}`;
-        }
-
-        // PAGAMENTO
-        function confirmarPagamento() {
-            const token = gerarToken();
-            const dataHora = new Date().toLocaleString('pt-BR');
-
-            // UI Updates
-            document.getElementById('btnConfirmar').classList.add('hidden');
-            document.getElementById('result-area').classList.remove('hidden');
-            document.getElementById('token-final').innerText = token;
-            showToast("🚀 Pedido confirmado! Salve o Token.", "success");
-
-            // Save Data
-            userHistory.push({ item: selectedProduct, token: token, data: dataHora, price: selectedPrice });
-            const dataToSave = { nick: currentUser, history: userHistory };
-            localStorage.setItem('tdr_save_v3', JSON.stringify(dataToSave));
+        function confirmPayment() {
+            const token = "ZDG-" + Math.random().toString(36).substr(2, 6).toUpperCase();
             
-            renderizarHistorico();
-            enviarLogDiscord(token, dataHora);
+            // UI Update
+            document.getElementById('btn-confirmar').classList.add('hidden');
+            document.getElementById('payment-success').classList.remove('hidden');
+            document.getElementById('final-token').innerText = token;
+            
+            // Salvar no Histórico
+            saveToHistory(currentItem, currentPrice, token);
+
+            // Enviar Log
+            sendWebhook(token);
         }
 
-        function renderizarHistorico() {
-            const list = document.getElementById('history-list');
-            list.innerHTML = "";
-            
-            if (userHistory.length === 0) {
-                list.innerHTML = '<div style="color:#444; text-align:center; padding:20px;">Nenhum pedido realizado ainda.</div>';
-                return;
-            }
+        // HISTÓRICO LOCAL
+        function saveToHistory(item, price, token) {
+            let history = JSON.parse(localStorage.getItem('zdg_history') || "[]");
+            history.unshift({
+                item: item,
+                price: price,
+                token: token,
+                date: new Date().toLocaleTimeString()
+            });
+            localStorage.setItem('zdg_history', JSON.stringify(history));
+            loadHistory();
+        }
 
-            userHistory.slice().reverse().forEach(compra => {
-                const div = document.createElement('div');
-                div.className = 'history-item';
-                div.innerHTML = `
-                    <div>
-                        <div style="color:#fff; font-weight:bold;">${compra.item}</div>
-                        <div style="color:#555; font-size:0.8rem;">${compra.data} • R$ ${compra.price.toFixed(2)}</div>
+        function loadHistory() {
+            const container = document.getElementById('history-container');
+            const history = JSON.parse(localStorage.getItem('zdg_history') || "[]");
+            
+            container.innerHTML = history.length ? "" : "<div style='color:#444; font-style:italic;'>Nenhum registro encontrado.</div>";
+
+            history.slice(0, 5).forEach(h => {
+                container.innerHTML += `
+                    <div style="background: rgba(0,0,0,0.3); border-left: 3px solid var(--neon-blue); padding: 10px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <span style="color:#fff; font-weight:bold;">${h.item}</span>
+                            <span style="display:block; font-size:0.75rem; color:#666;">${h.date}</span>
+                        </div>
+                        <span style="font-family:monospace; color:var(--neon-blue);">${h.token}</span>
                     </div>
-                    <div class="token-badge">${compra.token}</div>
                 `;
-                list.appendChild(div);
             });
         }
 
-        function enviarLogDiscord(token, dataHora) {
-            const payload = {
-                content: "💰 **NOVA VENDA NO SITE TDR!**",
-                username: "TDR BOT",
-                avatar_url: "https://i.imgur.com/3M34hi2.png",
+        // WEBHOOK DISCORD
+        function sendWebhook(token) {
+            const embed = {
+                username: "ZDG STORE BOT",
+                avatar_url: "https://cdn-icons-png.flaticon.com/512/2965/2965302.png", // Ícone genérico de radar
                 embeds: [{
-                    title: "Novo Pedido Confirmado",
-                    color: 16766720, // Gold
+                    title: "🛒 NOVA VENDA APROVADA",
+                    color: 38891, // Cor Ciano Decimal
+                    description: `O usuário **${currentUser}** reportou um pagamento.`,
                     fields: [
-                        { name: "👤 Jogador", value: currentUser, inline: true },
-                        { name: "📦 Item", value: selectedProduct, inline: true },
-                        { name: "💲 Valor", value: `R$ ${selectedPrice.toFixed(2)}`, inline: true },
-                        { name: "🔑 Token", value: `\`${token}\``, inline: false },
-                        { name: "📅 Data", value: dataHora, inline: false }
+                        { name: "📦 Item", value: currentItem, inline: true },
+                        { name: "💰 Valor", value: `R$ ${currentPrice.toFixed(2)}`, inline: true },
+                        { name: "🔑 Token de Segurança", value: `\`${token}\``, inline: false }
                     ],
-                    footer: { text: "Sistema Automático TDR Store" }
+                    footer: { text: "Sistema ZDG | Zona de Guerra" },
+                    timestamp: new Date()
                 }]
             };
 
-            fetch(WEBHOOK_URL, {
+            fetch(DISCORD_WEBHOOK, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).catch(console.error);
+                body: JSON.stringify(embed)
+            });
+        }
+
+        // UTILITÁRIO
+        function showToast(msg, type='info') {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            t.classList.add('active');
+            
+            if(type === 'error') t.style.borderColor = 'red';
+            else t.style.borderColor = 'var(--neon-blue)';
+
+            setTimeout(() => t.classList.remove('active'), 3000);
         }
     </script>
 </body>

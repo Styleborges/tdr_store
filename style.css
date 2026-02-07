@@ -2,7 +2,6 @@
   --bg0:#07000c; --bg1:#0b0012;
   --text:rgba(255,255,255,.92);
   --muted:rgba(255,255,255,.65);
-  --stroke:rgba(255,255,255,.10);
   --pink:#ff2fa4; --red:#ff005d; --vio:#7c3aed;
   --r:18px; --w:1180px;
 }
@@ -139,7 +138,7 @@ body{
 .panel-head h2{margin:0; font-size:18px}
 .muted{color:var(--muted)}
 
-/* --- Grid menor / não estoura --- */
+/* Grid menor / não estoura */
 .grid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -169,26 +168,16 @@ body{
   display:block;
   aspect-ratio: 16/10;
   object-fit: cover;
+  background: rgba(0,0,0,.35);
 }
 
-/* preview de vídeo (thumb leve) */
-.thumb{
+/* preview de vídeo (puxa 1º frame) */
+.vthumb{
   width:100%;
+  display:block;
   aspect-ratio:16/10;
-  background:
-    radial-gradient(400px 220px at 30% 20%, rgba(255,47,164,.18), transparent 60%),
-    radial-gradient(420px 240px at 70% 80%, rgba(124,58,237,.14), transparent 60%),
-    rgba(255,255,255,.06);
-  display:grid;
-  place-items:center;
-}
-.play{
-  width:52px;height:52px;border-radius:999px;
-  display:grid;place-items:center;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(0,0,0,.25);
-  font-weight:1000;
-  font-size:16px;
+  object-fit:cover;
+  background: rgba(0,0,0,.35);
 }
 
 .badge{
@@ -233,7 +222,7 @@ body{
   font-weight: 800;
 }
 
-/* --- Lightbox fullscreen real --- */
+/* Lightbox fullscreen real */
 .lightbox{
   position:fixed; inset:0; z-index:80;
   display:grid; place-items:center;
@@ -278,7 +267,7 @@ body{
   border-radius: var(--r);
   border:1px solid rgba(255,255,255,.10);
   background: rgba(0,0,0,.18);
-  object-fit: contain; /* não corta */
+  object-fit: contain;
 }
 
 .lightbox-footer{

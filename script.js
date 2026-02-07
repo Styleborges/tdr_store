@@ -95,6 +95,7 @@ function render() {
 
   grid.innerHTML = filtered.map(cardHTML).join("");
 
+  // click abre lightbox
   grid.querySelectorAll("[data-open]").forEach((el) => {
     el.addEventListener("click", () => {
       const payload = el.getAttribute("data-open");
@@ -102,6 +103,24 @@ function render() {
       const item = JSON.parse(payload);
       showLightbox(item);
     });
+  });
+
+  // força thumbnail do vídeo = 1º frame (sem tocar)
+  grid.querySelectorAll("video.vthumb").forEach((v) => {
+    v.addEventListener("loadedmetadata", () => {
+      try {
+        v.currentTime = Math.min(0.1, v.duration || 0.1);
+      } catch {}
+    }, { once: true });
+
+    v.addEventListener("seeked", () => {
+      try { v.pause(); } catch {}
+    }, { once: true });
+
+    v.addEventListener("error", () => {
+      // se falhar, deixa parado (fundo escuro já existe)
+      try { v.pause(); } catch {}
+    }, { once: true });
   });
 }
 
@@ -115,8 +134,16 @@ function cardHTML(item) {
   if (item.type === "photo") {
     media = `<img src="${escAttr(item.url)}" alt="${name}" loading="lazy">`;
   } else {
-    // thumbnail leve no card (vídeo só carrega no lightbox)
-    media = `<div class="thumb"><div class="play">▶</div></div>`;
+    const url = String(item.url || "");
+    const isWebm = url.toLowerCase().endsWith(".webm");
+    const mime = isWebm ? "video/webm" : "video/mp4";
+    // se você adicionar "poster" no JSON, o browser usa como fallback
+    const poster = item.poster ? `poster="${escAttr(item.poster)}"` : "";
+    media = `
+      <video class="vthumb" muted playsinline preload="metadata" ${poster}>
+        <source src="${escAttr(url)}" type="${mime}">
+      </video>
+    `;
   }
 
   return `
@@ -141,11 +168,9 @@ function showLightbox(item) {
   if (item.type === "photo") {
     lightboxBody.innerHTML = `<img src="${escAttr(item.url)}" alt="${esc(item.name || "")}">`;
   } else {
-    // tenta identificar mime por extensão (mp4/webm)
     const url = String(item.url || "");
     const isWebm = url.toLowerCase().endsWith(".webm");
     const mime = isWebm ? "video/webm" : "video/mp4";
-
     lightboxBody.innerHTML = `
       <video controls autoplay playsinline preload="metadata">
         <source src="${escAttr(url)}" type="${mime}">

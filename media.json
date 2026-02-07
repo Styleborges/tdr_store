@@ -1,0 +1,14 @@
+{
+  "photos": [
+    { "name": "Peito Gostoso", "url": "media/photos/Peito Gostoso.jpg", "type": "photo", "bucket": "photos" }
+  ],
+  "shorts": [
+    { "name": "short1.mp4", "url": "media/shorts/short1.mp4", "type": "video", "bucket": "shorts" }
+  ],
+  "free": [
+    { "name": "Onlyfans gostosa Ana Schultz sentando no namorado", "url": "media/free/Onlyfans gostosa Ana Schultz sentando no namorado.mp4", "type": "video", "bucket": "free" }
+  ],
+  "premium": [
+    { "name": "video2.mp4", "url": "media/premium/video2.mp4", "type": "video", "bucket": "premium" }
+  ]
+}
